@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<br> 
+<p> formulaire billets </p>
+<br>
+
+
+{{ form_start(formOrder)}}
+
+{{ form_row(formOrder.dateOrder)}}
+{#{ form_row(formOrder.firstName, {'attr':{'placeholder':"Votre prénom"}}) } #}
+{{ form_row(formOrder.price) }}
+
+</div>
+{{ form_end(formOrder)}}
+</div>
+
+{# {form_start(formTicket)#}
+
+{# { form_row(formTicket.dateEntry)} #}
+{# { form_row(formTicket.fullDay, {'attr':{'placeholder':"Votre email"}}) }# }
+
+<button  type="submit" class="btn btn-primary">Sélectionner</button>
+
+{ #{ form_end(formTicket)}#}
+
+{% endblock %}

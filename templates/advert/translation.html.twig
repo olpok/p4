@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    
+    <h1>{% trans %}Symfony is great{% endtrans %} in english</h1>
+    <h2>  {{'Hello'|trans}}  {{name}} ! in english</h2>
+    <h2>  {{ 'Hello'|trans }}!  in english </h2> 
+    
+    <h2>  {{ 'Bienvenue'|trans }}! en français</h2>
+    <h1>{% trans %}J'aime Symfony{% endtrans %}! en français</h1>
+
+   
+
+    <p>Lorem ipsum dolor sitconsectetur adipisicing elit. Eligendi non voluptates voluptas? </p>
+    <p>Lorem ipsum dolor siciis assumenda officia quibusdam deleniti eos cupiditate dolore doloribus!</p>
+
+{% endblock %}

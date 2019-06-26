@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Billets Musée du Louvre{% endblock %}</title>
+    
+        <link rel="stylesheet"
+        href="https://bootswatch.com/4/simplex/bootstrap.min.css">
+        <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="{{ path ('home') }}">Billets Musée du Louvre</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor02">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path ('select') }}">Acheter <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path ('step2') }}">Step2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path ('advert') }}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path ('traduction') }}">Test traduction</a>
+                    </li>
+                </ul>
+
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>      
+                </form>
+
+                <form class="form-inline my-2 my-lg-0">
+                    <div class="form-group">
+                    <label for="exampleSelect1">Example select</label>
+                        <select class="form-control" id="exampleSelect1">
+                            <option value="french">fr</option>
+                            <option value="english">en</option>
+                        </select>
+                    </div>
+                </form>  
+
+            </div>
+        </nav>
+        <div class="container">
+        {% block body %}{% endblock %}
+        </div>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
