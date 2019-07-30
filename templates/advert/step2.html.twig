@@ -6,23 +6,56 @@
 <br>
 
 
-{{ form_start(formOrder)}}
+{{ form_start(form)}}
 
-{{ form_row(formOrder.dateOrder)}}
-{#{ form_row(formOrder.firstName, {'attr':{'placeholder':"Votre prénom"}}) } #}
-{{ form_row(formOrder.price) }}
+<b>errors</b>
+{{ form_errors(form)}}
 
+
+{#{ form_row(form.dateOrder)}#}
+{# { form_row(form.dateEntry)}#}
+
+{{ form_row(form.price) }}
+{{ form_row(form.email) }}
+{{ form_row(form.paymentType) }}
+
+
+
+<div id="allTickets">
+{{ form_row(form.tickets) }}
 </div>
-{{ form_end(formOrder)}}
-</div>
-
-{# {form_start(formTicket)#}
-
-{# { form_row(formTicket.dateEntry)} #}
-{# { form_row(formTicket.fullDay, {'attr':{'placeholder':"Votre email"}}) }# }
 
 <button  type="submit" class="btn btn-primary">Sélectionner</button>
+<br><br><br>
 
-{ #{ form_end(formTicket)}#}
+{{ form_end(form)}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#{form_start(formTicket)}#}
+
+{#{ form_row(formTicket.dateEntry)}#}
+{#{ form_row(formTicket.firstName, {'attr':{'placeholder':"Votre prénom"}}) }#}
+{#{ form_row(formTicket.lastName, {'attr':{'placeholder':"Votre nom"}}) }#}
+{#{ form_row(formTicket.country,  {'attr':{'placeholder':"Pays de résidence"}}) }#}
+{#{ form_row(formTicket.dateBirth) }#}
+{#{ form_row(formTicket.lowPriceAdmission) }#}
+{#{ form_row(formTicket.fullDay) }#}
+
+
+
+{#{ form_end(formTicket)}#}
 
 {% endblock %}
