@@ -19,32 +19,32 @@ class OrderTicket
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $number;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime",nullable=true)
      */
     private $dateOrder;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $price;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $paymentType;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="order_ticket")
+     * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="order_ticket", cascade={"persist","remove"})
      */
     private $tickets;
 
@@ -128,9 +128,15 @@ class OrderTicket
 
     public function addTicket(Ticket $ticket): self
     {
-        if (!$this->tickets->contains($ticket)) {
+        if (!$this->tickets->contains($ticket))
+         {
             $this->tickets[] = $ticket;
             $ticket->setOrderTicket($this);
+
+            // update price
+            $currentPrice = $this->getPrice();
+            $currentPrice = $currentPrice + $ticket->getAdmission()->getAmount();
+            $this->setPrice($currentPrice);
         }
 
         return $this;
@@ -140,6 +146,12 @@ class OrderTicket
     {
         if ($this->tickets->contains($ticket)) {
             $this->tickets->removeElement($ticket);
+
+            // update price => remove price
+            $currentPrice = $this->getPrice();
+            $currentPrice = $currentPrice - $ticket->getAdmission()->getAmount();
+            $this->setPrice($currentPrice);
+
             // set the owning side to null (unless already changed)
             if ($ticket->getOrderTicket() === $this) {
                 $ticket->setOrderTicket(null);
