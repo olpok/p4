@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdmissionRepository")
@@ -17,21 +18,23 @@ class Admission
      * @ORM\Column(type="integer")
      */
     private $id;
+    
+    // @Assert\PositiveOrZero
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $adult;
+    private $name;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $child;
+    private $constant_key;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string",length=255, nullable=true)
      */
-    private $senior;
+    private $amount;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="admission")
@@ -48,38 +51,38 @@ class Admission
         return $this->id;
     }
 
-    public function getAdult(): ?int
+    public function getName(): ?string
     {
-        return $this->adult;
+        return $this->name;
     }
 
-    public function setAdult(?int $adult): self
+    public function setName(?string $name): self
     {
-        $this->adult = $adult;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getChild(): ?int
+    public function getConstantKey(): ?string
     {
-        return $this->child;
+        return $this->constant_key;
     }
 
-    public function setChild(?int $child): self
+    public function setConstantKey(?string $constant_key): self
     {
-        $this->child = $child;
+        $this->constant_key = $constant_key;
 
         return $this;
     }
 
-    public function getSenior(): ?int
+    public function getAmount(): ?string
     {
-        return $this->senior;
+        return $this->amount;
     }
 
-    public function setSenior(?int $senior): self
+    public function setAmount(?string $amount): self
     {
-        $this->senior = $senior;
+        $this->amount = $amount;
 
         return $this;
     }
