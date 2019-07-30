@@ -1,20 +1,55 @@
 {% extends 'base.html.twig' %}
 
+
 {% block body %}
 
     <h1>{{ title }}</h1>
     <h1>{% trans %}Symfony is great!{% endtrans %}</h1>
     <h2>  {{ 'Hello'|trans }}!  in english </h2>
+<br/> <br/>
 
-    
-
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown button
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+    </div>
+    <br/> <br/>
     <h2> {{ 'Bienvenue'|trans }}! en français</h2>
     <h1>{% trans %}J'aime Symfony{% endtrans %}! en français</h1>
-   
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing Lorem ipsum  dolor sit amet, consectetur 
+<br/> <br/>
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown link
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+    </div>
+   <br/> <br/>
+
+   <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+  <button type="button" class="btn btn-info">Info</button>
+  <div class="btn-group" role="group">
+    <button id="btnGroupDrop3" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop3">
+      <a class="dropdown-item" href="#">Dropdown link</a>
+      <a class="dropdown-item" href="#">Dropdown link</a>
+    </div>
+  </div>
+</div>
+  <br/> <br/>
+    <p style="color:blue">Lorem ipsum dolor sit amet, consectetur adipisicing Lorem ipsum  dolor sit amet, consectetur 
     adipisicing elit. Eligendi non quis voluptatum ducimus voluptates voluptas? </p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui dicta minus molestiae vel beatae 
+    <p >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui dicta minus molestiae vel beatae 
     natus eveniet ratione temporibus aperiam harum alias officiis assumenda officia quibusdam deleniti 
     eos cupiditate dolore doloribus!</p>
 
