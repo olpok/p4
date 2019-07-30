@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TicketRepository")
@@ -16,45 +18,47 @@ class Ticket
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $dateEntry;
+    //* @Assert\GreaterThanOrEqual("today")
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $firstName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $lastName;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $country;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date",nullable=true)
      */
     private $dateBirth;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="date",nullable=true)
+     */
+    private $dateEntry;
+
+    /**
+     * @ORM\Column(type="boolean",nullable=true)
      */
     private $lowPriceAdmission;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $code;
-
-    /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean",nullable=true)
      */
     private $fullDay;
+
+    /**
+     * @ORM\Column(type="string", length=255,nullable=true)
+     */
+    private $code;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\OrderTicket", inversedBy="tickets")
@@ -70,18 +74,6 @@ class Ticket
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getDateEntry(): ?\DateTimeInterface
-    {
-        return $this->dateEntry;
-    }
-
-    public function setDateEntry(\DateTimeInterface $dateEntry): self
-    {
-        $this->dateEntry = $dateEntry;
-
-        return $this;
     }
 
     public function getFirstName(): ?string
@@ -132,6 +124,19 @@ class Ticket
         return $this;
     }
 
+    public function getDateEntry(): ?\DateTimeInterface
+    {
+        return $this->dateEntry;
+    }
+
+    public function setDateEntry(\DateTimeInterface $dateEntry): self
+    {
+        $this->dateEntry = $dateEntry;
+
+        return $this;
+    }
+
+
     public function getLowPriceAdmission(): ?bool
     {
         return $this->lowPriceAdmission;
@@ -144,18 +149,6 @@ class Ticket
         return $this;
     }
 
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    public function setCode(string $code): self
-    {
-        $this->code = $code;
-
-        return $this;
-    }
-
     public function getFullDay(): ?bool
     {
         return $this->fullDay;
@@ -164,6 +157,18 @@ class Ticket
     public function setFullDay(bool $fullDay): self
     {
         $this->fullDay = $fullDay;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
 
         return $this;
     }
