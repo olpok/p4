@@ -2,15 +2,22 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Billets Musée du Louvre{% endblock %}</title>
-    
+        <title>{% block title %}Billets Musée du Louvre{% endblock %}</title>      
+        {% block stylesheets %}
         <link rel="stylesheet"
         href="https://bootswatch.com/4/simplex/bootstrap.min.css">
+        <link rel="stylesheet"
+        href="https://bootswatch.com/4/simplex/_bootswatch.scss">
+        <link rel="stylesheet"
+        href="https://bootswatch.com/4/simplex/_variables.scss">
+        
+        <link rel="stylesheet"
+        href="css/style.css">
         <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
-        {% block stylesheets %}{% endblock %}
+        {% endblock %}
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -33,7 +40,59 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path ('traduction') }}">Test traduction</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path ('traduction') }}">Langues</a>
+                    </li>
+                    <li class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" 
+                        data-toggle="dropdown">Dropdown Example
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a  class="dropdown-item" href="en">en</a></li>
+                            <li><a  class="dropdown-item" href="fr">fr</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
+                <!-- Dropdown -->
+                <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="en" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown link
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="en">Action</a>
+                            <a class="dropdown-item" href="fr">Another action</a>
+                        </div>
+                </div>
+                 
+                <br/> <br/>
+
+				<div class="form-group">
+                    <select class="custom-select">
+                    <option selected="">Open this select menu</option>
+                    <option value="1">One<a class="dropdown-item" href="fr">fr</a></option>
+                    
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                    </select>
+                </div>	
+
+<!--
+                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                    <button type="button" class="btn btn-info">Info</button>
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop3" type="button" class="btn btn-info dropdown-toggle" 
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop3" x-placement="bottom-start" 
+                            style="position: absolute; will-change: transform; top: 0px; left: 0px; 
+                            transform: translate3d(0px, 33px, 0px);">
+                                <a class="dropdown-item" href="fr">fr</a>
+                                <a class="dropdown-item" href="en">en</a>
+                            </div>
+                    </div>
+                </div>
+                
+                
 
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search">
@@ -45,10 +104,10 @@
                     <label for="exampleSelect1">Example select</label>
                         <select class="form-control" id="exampleSelect1">
                             <option value="french">fr</option>
-                            <option value="english">en</option>
+                            <option  value="english">en</option>
                         </select>
                     </div>
-                </form>  
+                </form>  -->
 
             </div>
         </nav>
