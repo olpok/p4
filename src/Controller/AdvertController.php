@@ -53,10 +53,11 @@ class AdvertController extends AbstractController
      * @Route("/select", name="select")
      */
     public function select(Request $request, OrderManager $orderManager){
+   
 
       $defaultData = array('message' => 'myform');
 
-      $form = $this -> createFormBuilder($defaultData)
+      $form = $this->createFormBuilder($defaultData)
                     -> add ('dateEntry', DateType::class) 
                     -> add ('email', EmailType::class)
                     -> add ('fullDay', ChoiceType::class, ['choices' => 
@@ -73,16 +74,12 @@ class AdvertController extends AbstractController
       $form->handleRequest($request);
       if($form->isSubmitted() && $form->isValid()) 
 
-  /*    $order = $orderManager->beginOrder();*/
+    
         {
             $data = $form->getData();
-            $this->session->set('dateEntry', $data['dateEntry']);
-            $this->session->set('email', $data['email']);
-            $this->session->set('fullDay', $data['fullDay']);//boolean
-            $this->session->set('nbAdultTicket', $data['adultAdmission']); // ajouter la classe pour le CSS
-            $this->session->set('nbSeniorTicket', $data['seniorAdmission']);
-            $this->session->set('nbChildTicket', $data['childAdmission']);
-            $this->session->set('nbLowPriceTicket', $data['lowPriceAdmission']);
+
+            $orderManager->beginOrder($data);
+           // if(val == 404) ....
 
             return $this->redirectToRoute('step2');
         }
@@ -90,6 +87,7 @@ class AdvertController extends AbstractController
         return $this->render('advert/select.html.twig', [
             'form' => $form->createView()
         ]);
+        
     }
     
     /**
@@ -100,37 +98,6 @@ class AdvertController extends AbstractController
         $em=$this->getDoctrine()->getManager();
 
         $order = $orderManager->createOrder();
-/*
-        $order = new OrderTicket();
-        
-        $order->setEmail($this->session->get('email'));
-
-
-        // ticket adulte
-        $Adultadmission=$em->getRepository(Admission::class)->findOneBy(['constant_key'=>"ADULT_PRICE"]);
-        for($i = 0; $i < $this->session->get('nbAdultTicket'); $i++) 
-       {
-            $ticket = new Ticket(); // cree par n ticket adulte
-            $ticket->setAdmission($Adultadmission);
-            $ticket->setDateEntry($this->session->get('dateEntry'));
-            $order->addTicket($ticket);
-        }
-        // ticket senior
-        $Senioradmission=$em->getRepository(Admission::class)->findOneBy(['constant_key'=>"SENIOR_PRICE"]);
-        for($j = 0; $j < $this->session->get('nbSeniorTicket'); $j++)
-       {
-            $ticket = new Ticket(); // cree par n ticket adulte
-            $ticket->setAdmission($Senioradmission); 
-            $order->addTicket($ticket);
-        }
-         // ticket child
-        $Childadmission=$em->getRepository(Admission::class)->findOneBy(['constant_key'=>"CHILD_PRICE"]);
-        for($k = 0; $k < $this->session->get('nbChildTicket'); $k++)
-        {
-            $ticket = new Ticket(); // cree par n ticket adulte
-            $ticket->setAdmission($Childadmission);
-            $order->addTicket($ticket);
-        }*/
 
         $form= $this->createForm(OrderTicketType::class, $order); 
         $form->handleRequest($request);
@@ -163,6 +130,50 @@ class AdvertController extends AbstractController
         return $this->render('advert/step3.html.twig');
     } 
 
+    /**
+     * @Route(
+     *     "/charge",
+     *     name="charge",
+     *     methods="POST"
+     * )
+     */
+    public function checkoutAction(Request $request)
+    {
+        \Stripe\Stripe::setApiKey("sk_test_DJhgWO9m8Fu2aXsUTVQEwnWJ00kfk8QKBu");
+
+        // Get the credit card details submitted by the form
+        $token = $_POST['stripeToken'];
+
+        // Create a charge: this will charge the user's card
+        try {
+            $charge = \Stripe\Charge::create(array(
+                "amount" => 1000, // Amount in cents
+                "currency" => "eur",
+                "source" => $token,
+                "description" => "Paiement Stripe - OpenClassrooms Exemple"
+            ));
+            $this->addFlash("success","Bravo ça marche !");
+            return $this->redirectToRoute("step3");
+        } 
+        
+        catch(\Stripe\Error\Card $e) {
+
+            $this->addFlash("error","Snif ça marche pas :(");
+            return $this->redirectToRoute("step4");
+            // The card has been declined
+        }
+    }
+
+    
+    /**
+     * @Route("/step4", name="step4")
+     */
+    public function step4()
+    {
+        return $this->render('advert/step4.html.twig');
+    } 
+
+
      /**
      * @Route("/prepare", name="prepare")
      */
@@ -172,26 +183,26 @@ class AdvertController extends AbstractController
     }
 
     /**
-     * @Route(
-     *     "/checkout",
-     *     name="checkout",
-     *     methods="POST"
-     * )
-     */
-    public function checkoutAction(Request $request)
-    {
-        //TODO : Cette action est à faire
-    }
-
-    /**
      * @Route("/advert", name="advert")
      */
-    public function index()
+    public function indexAction()
     {
-        return $this->render('advert/index.html.twig', [
-            'controller_name' => 'AdvertController',
-        ]);
-    }  
+      // On a donc accès au conteneur :
+      $mailer = $this->container->get('mailer'); 
+  
+      // On peut envoyer des e-mails, etc.
+    }
+
+ //   /**
+ //    * @Route("/advert", name="advert")
+  //   */
+ //   public function index()
+ //   {
+  //      return $this->render('advert/index.html.twig', [
+  //          'controller_name' => 'AdvertController',
+  //      ]);
+  //  }  
+
     /**
      * @Route("/traduction/12", name="traduction")
      */

@@ -133,7 +133,12 @@ class OrderTicket
             $this->tickets[] = $ticket;
             $ticket->setOrderTicket($this);
 
+            
             // update price
+            
+            //if (fullDay == O) {
+            //  $price = $this->price/2  
+            //} ;
             $currentPrice = $this->getPrice();
             $currentPrice = $currentPrice + $ticket->getAdmission()->getAmount();
             $this->setPrice($currentPrice);

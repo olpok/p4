@@ -6,6 +6,11 @@
      background-color: lightgreen;  
 }
 
+#AllTickets
+{
+     background-color: rgb(199, 199, 230);  
+}
+
 /*
 [class="tes"], body {
   background-color: lightgreen;
