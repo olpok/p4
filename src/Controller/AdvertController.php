@@ -34,6 +34,7 @@ class AdvertController extends AbstractController
     {
         $this->session = $session;
     }
+
     /**
      * @Route("/", name="home")
      */
@@ -46,14 +47,13 @@ class AdvertController extends AbstractController
             'title' => "Hello!"
         ]);
     }
+   
 
-    
-
- /**
+    /**
      * @Route("/select", name="select")
      */
-    public function select(Request $request, OrderManager $orderManager){
-   
+    public function select(Request $request, OrderManager $orderManager)
+    {
 
       $defaultData = array('message' => 'myform');
 
@@ -73,7 +73,6 @@ class AdvertController extends AbstractController
 
       $form->handleRequest($request);
       if($form->isSubmitted() && $form->isValid()) 
-
     
         {
             $data = $form->getData();
@@ -93,7 +92,10 @@ class AdvertController extends AbstractController
     /**
      * @Route("/step2", name="step2")
      */
-    public function step2(Request $request, ObjectManager $manager, Session $session, OrderManager $orderManager){
+    public function step2(Request $request, ObjectManager $manager, Session $session, 
+    OrderManager $orderManager)
+    
+    {
         
         $em=$this->getDoctrine()->getManager();
 
@@ -101,26 +103,20 @@ class AdvertController extends AbstractController
 
         $form= $this->createForm(OrderTicketType::class, $order); 
         $form->handleRequest($request);
-
-
       
         if($form->isSubmitted() && $form->isValid())   
         {
-
             echo 'is valid';
             $manager->persist($order);
-   ;
             $manager->flush();
             return $this->redirectToRoute('step3');
-        } else {
-            echo 'no submit, no valid';
-        }
+        } 
         
-    return $this->render('advert/step2.html.twig', [
+        return $this->render('advert/step2.html.twig', [
         'form' => $form->createView(), 
-    ]);
+        ]);
 
-}
+    }
 
     /**
      * @Route("/step3", name="step3")
@@ -152,14 +148,14 @@ class AdvertController extends AbstractController
                 "source" => $token,
                 "description" => "Paiement Stripe - OpenClassrooms Exemple"
             ));
-            $this->addFlash("success","Bravo ça marche !");
-            return $this->redirectToRoute("step3");
-        } 
+            $this->addFlash('success','Bravo ça marche !');
+            return $this->redirectToRoute("step4");
+            } 
         
         catch(\Stripe\Error\Card $e) {
 
             $this->addFlash("error","Snif ça marche pas :(");
-            return $this->redirectToRoute("step4");
+            return $this->redirectToRoute("step3");
             // The card has been declined
         }
     }
@@ -173,31 +169,47 @@ class AdvertController extends AbstractController
         return $this->render('advert/step4.html.twig');
     } 
 
-
-     /**
-     * @Route("/prepare", name="prepare")
-     */
-    public function prepareAction()
-    {
-        return $this->render('advert/prepare.html.twig');
-    }
-
+    
     /**
      * @Route("/advert", name="advert")
      */
-    public function indexAction()
+    public function sendEmail(\Swift_Mailer $mailer)
     {
-      // On a donc accès au conteneur :
-      $mailer = $this->container->get('mailer'); 
-  
-      // On peut envoyer des e-mails, etc.
+        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('send@example.com')
+            ->setTo('recipient@example.com')
+            ->setBody('You should see me from the profiler!')
+               // $this->renderView(
+                    // templates/emails/registration.html.twig
+               //     'emails/registration.html.twig'//,
+                    //['name' => $name]
+                
+               //'text/html'
+            
+
+            // you can remove the following code if you don't define a text version for your emails
+         //   ->addPart(
+         //       $this->renderView(
+         //           'emails/registration.txt.twig'//,
+                   // ['name' => $name]
+         //       ),
+         //       'text/plain'
+         //   )
+        ;
+
+        $mailer->send($message);
+
+        return $this->render('advert/index.html.twig', [
+                     'controller_name' => 'AdvertController',
+                 ]);
+       // return $this->render(...);
     }
 
  //   /**
  //    * @Route("/advert", name="advert")
   //   */
  //   public function index()
- //   {
+//   {
   //      return $this->render('advert/index.html.twig', [
   //          'controller_name' => 'AdvertController',
   //      ]);

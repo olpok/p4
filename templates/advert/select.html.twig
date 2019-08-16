@@ -2,150 +2,174 @@
 
 {% block body %}
 
-<h1> Affichage formulaire sélection </h1>
+    <h1> Affichage formulaire sélection </h1>
 
-<h5>Il existe 2 types de billets : le billet « Journée » et le billet « Demi-journée » 
-(il ne permet de rentrer qu’à partir de 14h00). Le musée est ouvert tous les jours sauf 
-le mardi (et fermé les 1er mai, 1er novembre et 25 décembre).
-<br> <br>
-Le musée propose plusieurs types de tarifs :
-<br><br>
-Un tarif « normal » à partir de 12 ans à 16 €
-<br>
-Un tarif « enfant » à partir de 4 ans et jusqu’à 12 ans, à 8 €
- (l’entrée est gratuite pour les enfants de moins de 4 ans)
-<br>
-Un tarif « senior » à partir de 60 ans pour 12  €
-<br>
-Un tarif « réduit » de 10 € accordé dans certaines conditions
- (étudiant, employé du musée, d’un service du Ministère de la Culture, militaire…)
-<br> <br>
-Pour commander, on doit sélectionner :
-<br><br>
-Le jour de la visite
-<br>
-Le type de billet (Journée, Demi-journée…). On peut commander un billet pour le jour même
- mais on ne peut plus commander de billet « Journée » une fois 14h00 passées.
-<br>
-Le nombre de billets souhaités
-<br><br>
-Il n’est pas possible de réserver pour les jours passés (!), les dimanches, 
-les jours fériés et les jours où plus de 1000 billets ont été vendus en tout pour ne pas dépasser
- la capacité du musée. <br><br>
- Pour chaque billet, l’utilisateur doit indiquer son nom, son prénom, son pays et sa date de naissance. 
- Elle déterminera le tarif du billet.
-<br>
-Si la personne dispose du tarif réduit, elle doit simplement cocher la case « Tarif réduit ». <br>
-Il sera nécessaire de présenter sa carte d’étudiant, militaire ou équivalent 
-lors de l’entrée pour prouver qu’on bénéficie bien du tarif réduit.</h5>
+    <h5>Il existe 2 types de billets : le billet « Journée » et le billet « Demi-journée » 
+    (il ne permet de rentrer qu’à partir de 14h00). Le musée est ouvert tous les jours sauf 
+    le mardi (et fermé les 1er mai, 1er novembre et 25 décembre).
+    <br> <br>
+    Le musée propose plusieurs types de tarifs :
+    <br><br>
+    Un tarif « normal » à partir de 12 ans à 16 €
+    <br>
+    Un tarif « enfant » à partir de 4 ans et jusqu’à 12 ans, à 8 €
+    (l’entrée est gratuite pour les enfants de moins de 4 ans)
+    <br>
+    Un tarif « senior » à partir de 60 ans pour 12  €
+    <br>
+    Un tarif « réduit » de 10 € accordé dans certaines conditions
+    (étudiant, employé du musée, d’un service du Ministère de la Culture, militaire…)
+    <br> <br>
+    Pour commander, on doit sélectionner :
+    <br><br>
+    Le jour de la visite
+    <br>
+    Le type de billet (Journée, Demi-journée…). On peut commander un billet pour le jour même
+    mais on ne peut plus commander de billet « Journée » une fois 14h00 passées.
+    <br>
+    Le nombre de billets souhaités
+    <br><br>
+    Il n’est pas possible de réserver pour les jours passés (!), les dimanches, 
+    les jours fériés et les jours où plus de 1000 billets ont été vendus en tout pour ne pas dépasser
+    la capacité du musée. <br><br>
+    Pour chaque billet, l’utilisateur doit indiquer son nom, son prénom, son pays et sa date de naissance. 
+    Elle déterminera le tarif du billet.
+    <br>
+    Si la personne dispose du tarif réduit, elle doit simplement cocher la case « Tarif réduit ». <br>
+    Il sera nécessaire de présenter sa carte d’étudiant, militaire ou équivalent 
+    lors de l’entrée pour prouver qu’on bénéficie bien du tarif réduit.</h5>
 
-<div>
+    <div>
 
-{{ form_start(form)}}
+    {{ form_start(form)}}
 
-{{ form_row(form.dateEntry)}}
-{{ form_row(form.email, {'attr':{'placeholder':"Votre email"}}) }}
-{{ form_row(form.fullDay, {'attr':{'placeholder':"Journée"}}) }}
+    {{ form_row(form.dateEntry)}}
+    {{ form_row(form.email, {'attr':{'placeholder':"Votre email"}}) }}
+    {{ form_row(form.fullDay, {'attr':{'placeholder':"Journée"}}) }}
 
-<div class="row" class="col-sm-12">
-    <legend class="col-form-label col-sm-2 col-form-label required">Tarif adulte</legend>
-    <div class="col">
-        <div class="form-control adultTarif" id="adultTarif-16">16 €</div>
-    </div>
-    <div class="col">{{ form_row(form.adultAdmission,{'attr':{'value':0}}) }}
-    </div>
-</div>
-
-<div class="row">
-    <legend class="col-form-label col-sm-2 col-form-label">Tarif senior</legend>
-    <div class="col"> 
-        <div class="form-control seniorTarif" id="seniorTarif-12">12 €</div>
-    </div>
-    <div class="col">{{ form_row(form.seniorAdmission,{'attr':{'value':0}}) }} </div>
-</div>
-
-<div class="row">
-    <legend class="col-form-label col-sm-2 col-form-label">Tarif enfant</legend>
-    <div class="col">
-        <div class="form-control childTarif" id="childTarif-8">8 €</div>
-    </div>
-    <div class="col">{{ form_row(form.childAdmission,{'attr':{'value':0}}) }}</div>
-</div>
-
-<div class="row">
-    <legend class="col-form-label col-sm-2 col-form-label">Tarif réduit</legend>
-    <div class="col">
-        <div class="form-control lowPriceTarif" id="lowPriceTarif-10">10 €</div>
-    </div>
-    <div class="col">{{ form_row(form.lowPriceAdmission,{'attr':{'value':0}}) }}</div>
-</div>
-
-<div class="row">
-    <legend class="col-form-label col-sm-2 col-form-label required">Total</legend>
-    <div class="col"> 
-        <div class="form-control" id="total"> €</div>
-    </div>
-    
-    <div class="col">
-        <button  type="submit" class="btn btn-primary">Sélectionner</button>
+    <div class="row" class="col-sm-12">
+        <legend class="col-form-label col-sm-2 col-form-label required">Tarif adulte</legend>
+        <div class="col">
+            <div class="form-control adultTarif" id="adultTarif-16">16 €</div>
+        </div>
+        <div class="col">{{ form_row(form.adultAdmission,{'attr':{'value':0}}) }}
+        </div>
     </div>
 
-</div>
+    <div class="row">
+        <legend class="col-form-label col-sm-2 col-form-label">Tarif senior</legend>
+        <div class="col"> 
+            <div class="form-control seniorTarif" id="seniorTarif-12">12 €</div>
+        </div>
+        <div class="col">{{ form_row(form.seniorAdmission,{'attr':{'value':0}}) }} </div>
+    </div>
 
-</div>
-{{ form_end(form)}}
-</div>
+    <div class="row">
+        <legend class="col-form-label col-sm-2 col-form-label">Tarif enfant</legend>
+        <div class="col">
+            <div class="form-control childTarif" id="childTarif-8">8 €</div>
+        </div>
+        <div class="col">{{ form_row(form.childAdmission,{'attr':{'value':0}}) }}</div>
+    </div>
 
+    <div class="row">
+        <legend class="col-form-label col-sm-2 col-form-label">Tarif réduit</legend>
+        <div class="col">
+            <div class="form-control lowPriceTarif" id="lowPriceTarif-10">10 €</div>
+        </div>
+        <div class="col">{{ form_row(form.lowPriceAdmission,{'attr':{'value':0}}) }}</div>
+    </div>
 
-
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-
-
-<script>
-
-
-    // quand je clique sur un champ input
-    $('.admissionItem').change(function() {
+    <div class="row">
+        <legend class="col-form-label col-sm-2 col-form-label required">Total</legend>
+        <div class="col"> 
+            <div class="form-control" id="total"> €</div>
+        </div>
         
-        // adult total
-        let myVarA = $('#form_adultAdmission').val();
-        let idAdulTarif = $('.adultTarif').attr('id'); // <=> adultTarif-16
-        let element = idAdulTarif.split('-'); // array('adultTarif', 16);
-        let tarifA = element[1]; // 16
-        let totalA =  parseInt(tarifA)*parseInt(myVarA);
+        <div class="col">
+            <button  type="submit" class="btn btn-primary">Sélectionner</button>
+        </div>
 
-       // senior total
-        let myVarS = $('#form_seniorAdmission').val();
-        let idSeniorTarif = $('.seniorTarif').attr('id'); 
-        let tarifS = idSeniorTarif.split('-')[1]; 
-        let totalS =  parseInt(tarifS)*parseInt(myVarS);
-         
-        // child total   
-        let myVarC = $('#form_childAdmission').val();
-        let idChildTarif = $('.childTarif').attr('id');
-        let tarifC = idChildTarif.split('-')[1];
-        let totalC =  parseInt(tarifC)*parseInt(myVarC);
+    </div>
 
-        console.log(totalS);
-
-        // lowprice total   
-        let myVarL = $('#form_lowPriceAdmission').val();
-        let idLowPriceTarif = $('.lowPriceTarif').attr('id');
-        let tarifL = idLowPriceTarif.split('-')[1];
-        let totalL =  parseInt(tarifL)*parseInt(myVarL);
-
-        // affichage total
-        let total = totalA+totalS+totalC+totalL;
-        $('#total').html(total);
-    })
+    </div>
+    {{ form_end(form)}}
+    </div>
 
 
 
-</script>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+
+    <script>
+
+
+        // quand je clique sur un champ input
+        $('.admissionItem').change(function() {
+            
+            // adult total
+            let myVarA = $('#form_adultAdmission').val();
+            let idAdulTarif = $('.adultTarif').attr('id'); // <=> adultTarif-16
+            let element = idAdulTarif.split('-'); // array('adultTarif', 16);
+            let tarifA = element[1]; // 16
+            let totalA =  parseInt(tarifA)*parseInt(myVarA);
+
+        // senior total
+            let myVarS = $('#form_seniorAdmission').val();
+            let idSeniorTarif = $('.seniorTarif').attr('id'); 
+            let tarifS = idSeniorTarif.split('-')[1]; 
+            let totalS =  parseInt(tarifS)*parseInt(myVarS);
+            
+            // child total   
+            let myVarC = $('#form_childAdmission').val();
+            let idChildTarif = $('.childTarif').attr('id');
+            let tarifC = idChildTarif.split('-')[1];
+            let totalC =  parseInt(tarifC)*parseInt(myVarC);
+
+            // lowprice total   
+            let myVarL = $('#form_lowPriceAdmission').val();
+            let idLowPriceTarif = $('.lowPriceTarif').attr('id');
+            let tarifL = idLowPriceTarif.split('-')[1];
+            let totalL =  parseInt(tarifL)*parseInt(myVarL);
+
+            // affichage total
+            let total = totalA+totalS+totalC+totalL;
+            $('#total').html(total);
+
+            updateFullDay();
+        });
+
+        $('#form_fullDay').change(function() {
+            let fullDay = $('#form_fullDay').val();
+            let total = $('#total').html();
+            let newTotal = 0;
+            if(fullDay == 0) {
+            newTotal = parseInt(total)/2;    
+            } else {
+            newTotal = parseInt(total)*2;
+            }
+            $('#total').html(newTotal);
+
+        })
+
+
+
+        function updateFullDay() {
+        let fullDay = $('#form_fullDay').val();
+        if(fullDay == 0) {
+            let total = $('#total').html();
+            let newTotal = parseInt(total)/2;
+            $('#total').html(newTotal);
+        };
+        };
+
+
+
+    </script>
 
 
 {% endblock %}

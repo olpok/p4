@@ -1,36 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<br> 
-<p> formulaire billets </p>
-<br>
+    <br> 
+    <p> formulaire billets </p>
+    <br>
 
 
-{{ form_start(form)}}
+    {{ form_start(form)}}
 
-<b>errors</b>
-{{ form_errors(form)}}
-
-
-{#{ form_row(form.dateOrder)}#}
-{# { form_row(form.dateEntry)}#}
-
-{{ form_row(form.price) }}
-{{ form_row(form.email) }}
-{{ form_row(form.paymentType) }}
+    <b>errors</b>
+    {{ form_errors(form)}}
 
 
+    {#{ form_row(form.dateOrder)}#}
+    {# { form_row(form.dateEntry)}#}
 
-<div id="allTickets">
-{{ form_row(form.tickets) }}
-</div>
-
-<button  type="submit" class="btn btn-primary">Sélectionner</button>
-<br><br><br>
-
-{{ form_end(form)}}
+    {{ form_row(form.price) }}
+    {{ form_row(form.email) }}
 
 
+
+    <div id="allTickets">
+    {{ form_row(form.tickets) }}
+    </div>
+
+    <button  type="submit" class="btn btn-primary">Sélectionner</button>
+    <br><br><br>
+
+    {{ form_end(form)}}
 
 
 
@@ -44,18 +41,18 @@
 
 
 
-{#{form_start(formTicket)}#}
-
-{#{ form_row(formTicket.dateEntry)}#}
-{#{ form_row(formTicket.firstName, {'attr':{'placeholder':"Votre prénom"}}) }#}
-{#{ form_row(formTicket.lastName, {'attr':{'placeholder':"Votre nom"}}) }#}
-{#{ form_row(formTicket.country,  {'attr':{'placeholder':"Pays de résidence"}}) }#}
-{#{ form_row(formTicket.dateBirth) }#}
-{#{ form_row(formTicket.lowPriceAdmission) }#}
-{#{ form_row(formTicket.fullDay) }#}
 
 
+    {#{form_start(formTicket)}#}
 
-{#{ form_end(formTicket)}#}
+    {#{ form_row(formTicket.dateEntry)}#}
+    {#{ form_row(formTicket.firstName, {'attr':{'placeholder':"Votre prénom"}}) }#}
+    {#{ form_row(formTicket.lastName, {'attr':{'placeholder':"Votre nom"}}) }#}
+    {#{ form_row(formTicket.country,  {'attr':{'placeholder':"Pays de résidence"}}) }#}
+    {#{ form_row(formTicket.dateBirth) }#}
+    {#{ form_row(formTicket.lowPriceAdmission) }#}
+    {#{ form_row(formTicket.fullDay) }#}
+
+    {#{ form_end(formTicket)}#}
 
 {% endblock %}
