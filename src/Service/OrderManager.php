@@ -10,20 +10,18 @@ use App\Entity\Admission;
 use Doctrine\ORM\EntityManagerInterface;
 
 
-
-
 class OrderManager
 {
 
     private $session;
     private $em;
 
-    /*const ADMISSION =
-
-    const ADULT_PRICE = 16;
-    const SENIOR_PRICE = 12;
-    const CHILD_PRICE = 8;*/
-
+    private $admissions=array(
+        'ADULT_PRICE' => 'nbAdultTicket',
+        'SENIOR_PRICE' => 'nbSeniorTicket',
+        'CHILD_PRICE' => 'nbChildTicket',
+        'LOW_PRICE' => 'nbLowPriceTicket'
+);
     public function __construct(SessionInterface $session, EntityManagerInterface $em )
     {
         $this->session = $session;
@@ -61,12 +59,7 @@ class OrderManager
                 
         $order->setEmail($this->session->get('email'));
 
-        $admissions = array(
-                                'ADULT_PRICE' => 'nbAdultTicket',
-                                'SENIOR_PRICE' => 'nbSeniorTicket',
-                                'CHILD_PRICE' => 'nbChildTicket',
-                                'LOW_PRICE' => 'nbLowPriceTicket'
-        );
+        $admissions = $this->admissions;
 
         foreach($admissions as $constant => $sessionNbKey) {
             $admission = $this->em->getRepository(Admission::class)->findOneBy(['constant_key'=>$constant]);

@@ -20,7 +20,6 @@ class OrderTicketType extends AbstractType
          //   ->add('dateOrder')
             ->add('email', EmailType::class)
             ->add('price')
-            ->add('paymentType')
             ->add(
                 'tickets', CollectionType::class, array(
                             'entry_type' => TicketType::class,

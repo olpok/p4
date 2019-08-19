@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TicketRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Ticket
 {
@@ -47,8 +48,8 @@ class Ticket
 
     /**
      * @ORM\Column(type="boolean",nullable=true)
-     */
-    private $lowPriceAdmission;
+     *//*
+    private $lowPriceAdmission;*/
 
     /**
      * @ORM\Column(type="boolean",nullable=true)
@@ -70,6 +71,22 @@ class Ticket
      * @ORM\ManyToOne(targetEntity="App\Entity\Admission", inversedBy="tickets")
      */
     private $admission;
+
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCodePrePersist()
+    {
+        if($this->getCode() === null) {
+            $this->setCode($this->createTicketCode());
+        }
+    }
+
+
+    public function createTicketCode() {
+        return date('Ymdhis');
+    }
 
     public function getId(): ?int
     {
@@ -136,7 +153,7 @@ class Ticket
         return $this;
     }
 
-
+/*
     public function getLowPriceAdmission(): ?bool
     {
         return $this->lowPriceAdmission;
@@ -147,7 +164,7 @@ class Ticket
         $this->lowPriceAdmission = $lowPriceAdmission;
 
         return $this;
-    }
+    }*/
 
     public function getFullDay(): ?bool
     {

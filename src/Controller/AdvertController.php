@@ -109,7 +109,8 @@ class AdvertController extends AbstractController
             echo 'is valid';
             $manager->persist($order);
             $manager->flush();
-            return $this->redirectToRoute('step3');
+
+            return $this->redirectToRoute('step3', array('orderId' => $order->getid()));
         } 
         
         return $this->render('advert/step2.html.twig', [
@@ -119,11 +120,13 @@ class AdvertController extends AbstractController
     }
 
     /**
-     * @Route("/step3", name="step3")
+     * @Route("/step3/{orderId}", name="step3")
      */
-    public function step3()
+    public function step3($orderId)
     {
-        return $this->render('advert/step3.html.twig');
+        $orderTicket =  
+        $em=$this->getDoctrine()->getManager()->getRepository(OrderTicket::class)->find($orderId);
+        return $this->render('advert/step3.html.twig', array('order' => $orderTicket));
     } 
 
     /**

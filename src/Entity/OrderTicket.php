@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OrderTicketRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class OrderTicket
 {
@@ -38,10 +39,10 @@ class OrderTicket
      */
     private $price;
 
-    /**
+    /*
      * @ORM\Column(type="string", length=255,nullable=true)
-     */
-    private $paymentType;
+     *
+    private $paymentType;*/
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="order_ticket", cascade={"persist","remove"})
@@ -51,6 +52,21 @@ class OrderTicket
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
+    }
+   
+    /**
+     * @ORM\PrePersist
+     */
+    public function setDateOrderPrePersist()
+    {
+        if($this->getDateOrder() === null) {
+        $this->setDateOrder($this->createDateOrder());
+        }
+    }
+
+    public function createDateOrder() {
+        return (new \DateTime());
+        //return date('Ymdhis\DateTimeInterface');
     }
 
     public function getId(): ?int
@@ -106,17 +122,6 @@ class OrderTicket
         return $this;
     }
 
-    public function getPaymentType(): ?string
-    {
-        return $this->paymentType;
-    }
-
-    public function setPaymentType(string $paymentType): self
-    {
-        $this->paymentType = $paymentType;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Ticket[]
