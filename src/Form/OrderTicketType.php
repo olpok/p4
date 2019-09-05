@@ -8,6 +8,7 @@ use App\Entity\OrderTicket;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -16,10 +17,8 @@ class OrderTicketType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          //  ->add('number')
-         //   ->add('dateOrder')
             ->add('email', EmailType::class)
-            ->add('price')
+            ->add('price', TextType::class, array('attr'=>array('readonly'=>'readonly')))
             ->add(
                 'tickets', CollectionType::class, array(
                             'entry_type' => TicketType::class,

@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+    	<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta charset="UTF-8">
         <title>{% block title %}Billets Musée du Louvre{% endblock %}</title>
-         <link rel="stylesheet" href="css/simplex.css">
-        <!-- 
+<!--    <link rel="stylesheet" href="css/simplex.css">-->
+       
                 
         <link rel="stylesheet"
-        href="https://bootswatch.com/4/simplex/bootstrap.min.css">-->
-
-        <!--      <link rel="stylesheet" 
-        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
+        href="https://bootswatch.com/4/simplex/bootstrap.min.css">
 
         {% block stylesheets %} 
        
@@ -33,32 +32,20 @@
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ path ('select') }}">Acheter <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ path ('select') }}">Acheter des billets<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path ('step2') }}">Step2</a>
-                    </li>
+                        <a class="nav-link" href="{{ path ('contact') }}">Contact</a>
+                    </li>  
+                     <li class="nav-item">
+                        <a class="nav-link" href="{{ path ('traduction') }}">Testmail</a>
+                    </li>  
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path ('advert') }}">Contact</a>
+                        <a class="nav-link" href="{{ path ('mentionslegales') }}">Mentions légales</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path ('traduction') }}">Test traduction</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path ('traduction') }}">Langues</a>
-                    </li>
-                  <!--   <li class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" 
-                        data-toggle="dropdown">Dropdown Example
-                        <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a  class="dropdown-item" href="en">en</a></li>
-                            <li><a  class="dropdown-item" href="fr">fr</a></li>
-                        </ul>
-                    </li> -->
-
                 </ul>
-                <!-- Dropdown -->
+
+                <!-- Dropdown
                 <div class="dropdown">
                         <a class="btn btn-secondary dropdown-toggle" href="en" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Dropdown link
@@ -67,53 +54,23 @@
                             <a class="dropdown-item" href="en">Action</a>
                             <a class="dropdown-item" href="fr">Another action</a>
                         </div>
-                </div>
-                 
-                <br/> <br/>
-
-				<div class="form-group">
-                    <select class="custom-select">
-                    <option selected="">Open this select menu</option>
-                    <option value="1">One<a class="dropdown-item" href="fr">fr</a></option>
-                    
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                    </select>
-                </div>	
-
-<!--
+                </div> -->
+                <br/><br/>	
 
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>      
+                    <input class="form-control mr-sm-2" type="text" placeholder="Recherche">            
                 </form>
-
-                <form class="form-inline my-2 my-lg-0">
-                    <div class="form-group">
-                    <label for="exampleSelect1">Example select</label>
-                        <select class="form-control" id="exampleSelect1">
-                            <option value="french">fr</option>
-                            <option  value="english">en</option>
-                        </select>
-                    </div>
-                </form>  -->
 
             </div>
         </nav>
 
         
-        <div class="container">
-         
+        <div class="container">        
 
-        {% block body %}
-           {% for message in app.flashes('success') %}
-                <div class="flash-success">
-                {{ message }}
-                </div>
-            {% endfor %}
+        {% block body %}  
         {% endblock %}
-        </div>
-        
-        {% block javascripts %}{% endblock %}
+ 
+        {% block javascripts %}
+        {% endblock %}
     </body>
 </html>

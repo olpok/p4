@@ -29,9 +29,6 @@ class TicketType extends AbstractType
                 ])
             ->add('country', CountryType::class)
             ->add('dateBirth', BirthdayType::class )
-        //    ->add('lowPriceAdmission')
-       //   ->add('code')
-       /*   ->add('admission')*/
         ;
     }
 

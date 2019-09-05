@@ -33,19 +33,24 @@ class OrderManager
      * @param $data
      * @return int
      */
-    public function beginOrder($data){
+    public function beginOrder($data)
+    {
+        $now  = (new \DateTime());
 
+        if ($data['dateEntry'] <= $now) return false;
+        
         $this->session->set('dateEntry', $data['dateEntry']);
         $this->session->set('email', $data['email']);
         $this->session->set('fullDay', $data['fullDay']);//boolean
-        $this->session->set('nbAdultTicket', $data['adultAdmission']); // ajouter la classe pour le CSS
+        $this->session->set('nbAdultTicket', $data['adultAdmission']); 
         $this->session->set('nbSeniorTicket', $data['seniorAdmission']);
         $this->session->set('nbChildTicket', $data['childAdmission']);
-        $this->session->set('nbLowPriceTicket', $data['lowPriceAdmission']);
+        $this->session->set('nbLowPriceTicket', $data['lowPriceAdmission']);      
 
         return true;
 
     }
+
 
    
     /**

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <br/><br/>
+
+    {# Makes an absolute URL to the /images/logo.png file #}
+    <img src="{{ absolute_url(asset('img/2.jpg')) }}">
+
+    <br/><br/>
+    <h2> Félicitations  {{ order.email }} ! </h2>
+
+    <p>  {#{order.email}#} <h4>Votre commande a bien été confirmée:</h4>
+
+            {#{ order.id }#}               
+
+            {#{ order.dateorder | date ('d/m/Y')  }#}
+            <br/>
+
+            {% for ticket in order.tickets %}
+              <hr/>
+
+                Date d'entrée: {{ ticket.dateentry | date ('d/m/Y')}}<br/>         
+
+                Nom: {{ ticket.firstname }}  Prénom: {{ ticket.lastname }} <br/>           
+
+                {{ ticket.admission.AmountLabel }}  <br/>
+
+                {{ ticket.fulldayLabel }}<br/>                               
+
+                Code: {{ ticket.code }}<br/>
+                <hr/>
+            {% endfor %}
+
+     <h5 >Montant total <b> {{ order.price }} €</b></h5>
+
+        <br/>
+  <h3>  Merci de votre achat et bonne visite!</h3></p>
+
+    {# Makes an absolute URL to the /images/logo.png file #}
+  <!--  <img src="{{ absolute_url(asset('img/2.jpg')) }}"> -->
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% block body %}
+
+
+    Félicitations  {{ order.email }} !
+
+    Votre commande a bien été confirmée:
+
+        {% for ticket in order.tickets %}
+  
+            Date d'entrée: {{ ticket.dateentry | date ('d/m/Y')}}         
+            Nom: {{ ticket.firstname }}  Prénom: {{ ticket.lastname }} <         
+            {{ ticket.admission.AmountLabel }}  
+            {{ ticket.fulldayLabel }}                              
+            Code: {{ ticket.code }}
+              
+        {% endfor %}
+
+    Montant total {{ order.price }} €
+
+    Merci de votre achat et bonne visite!
+
+{% endblock %}

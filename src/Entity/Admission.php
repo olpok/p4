@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+//use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdmissionRepository")
@@ -87,6 +87,20 @@ class Admission
         return $this;
     }
 
+    public function getAmountLabel() 
+    {
+        if($this->getAmount() == 8) {
+            $label = "Enfant";
+        } elseif  ($this->getAmount() == 10){
+            $label = "Tarif réduit";
+        } elseif ($this->getAmount() == 12){
+            $label = "Senior";
+        } else {
+           $label = "Adulte";
+        }
+        return $label;
+    }
+   
     /**
      * @return Collection|Ticket[]
      */

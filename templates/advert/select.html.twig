@@ -1,12 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+   
 
-    <h1> Affichage formulaire sélection </h1>
+      {% for message in app.flashes('error') %}
+          <br>  
+            <div class="btn btn-warning">
+            {{ message }}
+            </div> 
+            <br> 
+        {% endfor %}
 
-    <h5>Il existe 2 types de billets : le billet « Journée » et le billet « Demi-journée » 
-    (il ne permet de rentrer qu’à partir de 14h00). Le musée est ouvert tous les jours sauf 
-    le mardi (et fermé les 1er mai, 1er novembre et 25 décembre).
+    <h1> Sélectionnez vos billets </h1>
+
+    <h5>Le musée est ouvert tous les jours sauf 
+    le mardi (et fermé les 1er mai, 1er novembre et 25 décembre).<br> <br>
+    Il existe 2 types de billets : le billet « Journée » et le billet « Demi-journée » 
+    (il ne permet de rentrer qu’à partir de 14h00). 
     <br> <br>
     Le musée propose plusieurs types de tarifs :
     <br><br>
@@ -20,7 +30,7 @@
     Un tarif « réduit » de 10 € accordé dans certaines conditions
     (étudiant, employé du musée, d’un service du Ministère de la Culture, militaire…)
     <br> <br>
-    Pour commander, on doit sélectionner :
+    Pour commander, merci de sélectionner :
     <br><br>
     Le jour de la visite
     <br>
@@ -43,57 +53,61 @@
 
     {{ form_start(form)}}
 
+  
+
     {{ form_row(form.dateEntry)}}
+
+
     {{ form_row(form.email, {'attr':{'placeholder':"Votre email"}}) }}
     {{ form_row(form.fullDay, {'attr':{'placeholder':"Journée"}}) }}
 
-    <div class="row" class="col-sm-12">
-        <legend class="col-form-label col-sm-2 col-form-label required">Tarif adulte</legend>
-        <div class="col">
-            <div class="form-control adultTarif" id="adultTarif-16">16 €</div>
+        <div class="row" class="col-sm-12">
+            <legend class="col-form-label col-sm-2 col-form-label required">Tarif adulte</legend>
+            <div class="col">
+                <div class="form-control adultTarif" id="adultTarif-16">16 €</div>
+            </div>
+            <div class="col">{{ form_row(form.adultAdmission,
+            {'attr': 
+            {'value':0}}) }}
+            </div>
         </div>
-        <div class="col">{{ form_row(form.adultAdmission,{'attr':{'value':0}}) }}
-        </div>
-    </div>
 
-    <div class="row">
-        <legend class="col-form-label col-sm-2 col-form-label">Tarif senior</legend>
-        <div class="col"> 
-            <div class="form-control seniorTarif" id="seniorTarif-12">12 €</div>
+        <div class="row">
+            <legend class="col-form-label col-sm-2 col-form-label">Tarif senior</legend>
+            <div class="col"> 
+                <div class="form-control seniorTarif" id="seniorTarif-12">12 €</div>
+            </div>
+            <div class="col">{{ form_row(form.seniorAdmission,{'attr':{'value':0}}) }} </div>
         </div>
-        <div class="col">{{ form_row(form.seniorAdmission,{'attr':{'value':0}}) }} </div>
-    </div>
 
-    <div class="row">
-        <legend class="col-form-label col-sm-2 col-form-label">Tarif enfant</legend>
-        <div class="col">
-            <div class="form-control childTarif" id="childTarif-8">8 €</div>
+        <div class="row">
+            <legend class="col-form-label col-sm-2 col-form-label">Tarif enfant</legend>
+            <div class="col">
+                <div class="form-control childTarif" id="childTarif-8">8 €</div>
+            </div>
+            <div class="col">{{ form_row(form.childAdmission,{'attr':{'value':0}}) }}</div>
         </div>
-        <div class="col">{{ form_row(form.childAdmission,{'attr':{'value':0}}) }}</div>
-    </div>
 
-    <div class="row">
-        <legend class="col-form-label col-sm-2 col-form-label">Tarif réduit</legend>
-        <div class="col">
-            <div class="form-control lowPriceTarif" id="lowPriceTarif-10">10 €</div>
+        <div class="row">
+            <legend class="col-form-label col-sm-2 col-form-label">Tarif réduit</legend>
+            <div class="col">
+                <div class="form-control lowPriceTarif" id="lowPriceTarif-10">10 €</div>
+            </div>
+            <div class="col">{{ form_row(form.lowPriceAdmission,{'attr':{'value':0}}) }}</div>
         </div>
-        <div class="col">{{ form_row(form.lowPriceAdmission,{'attr':{'value':0}}) }}</div>
-    </div>
 
-    <div class="row">
-        <legend class="col-form-label col-sm-2 col-form-label required">Total</legend>
-        <div class="col"> 
-            <div class="form-control" id="total"> €</div>
-        </div>
+        <div class="row">
+            <legend class="col-form-label col-sm-2 col-form-label required">Total</legend>
+            <div class="col"> 
+                <div class="form-control" id="total"> €</div>
+            </div>
         
         <div class="col">
             <button  type="submit" class="btn btn-primary">Sélectionner</button>
         </div>
-
-    </div>
-
-    </div>
+    
     {{ form_end(form)}}
+
     </div>
 
 

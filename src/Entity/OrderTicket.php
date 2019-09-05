@@ -20,11 +20,6 @@ class OrderTicket
     private $id;
 
     /**
-     * @ORM\Column(type="integer",nullable=true)
-     */
-    private $number;
-
-    /**
      * @ORM\Column(type="datetime",nullable=true)
      */
     private $dateOrder;
@@ -39,10 +34,10 @@ class OrderTicket
      */
     private $price;
 
-    /*
-     * @ORM\Column(type="string", length=255,nullable=true)
-     *
-    private $paymentType;*/
+    /**
+     * @ORM\Column(type="string",length=255,nullable=true)
+     */
+    private $code;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="order_ticket", cascade={"persist","remove"})
@@ -66,25 +61,29 @@ class OrderTicket
 
     public function createDateOrder() {
         return (new \DateTime());
-        //return date('Ymdhis\DateTimeInterface');
     }
+
+    
+    /**
+     * @ORM\PrePersist
+     *//*
+    public function setCodePrePersist()
+    {
+        if($this->getCode() === null) {
+            $this->setCode($this->createOrderCode());
+        }
+    }
+
+    public function createOrderCode() {
+        return date('Ymdhis');
+    }*/
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNumber(): ?int
-    {
-        return $this->number;
-    }
-
-    public function setNumber(int $number): self
-    {
-        $this->number = $number;
-
-        return $this;
-    }
+ 
 
     public function getDateOrder(): ?\DateTimeInterface
     {
@@ -122,6 +121,18 @@ class OrderTicket
         return $this;
     }
 
+    public function getCode(): ?int
+    {
+        return $this->code;
+    }
+
+    public function setCode(int $code): self
+    {
+        $this->price = $code;
+
+        return $this;
+    }
+
 
     /**
      * @return Collection|Ticket[]
@@ -137,7 +148,6 @@ class OrderTicket
          {
             $this->tickets[] = $ticket;
             $ticket->setOrderTicket($this);
-
             
             // update price
             

@@ -1,17 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+        <br> 
+ 
+        {% for message in app.flashes('success') %}
+            <div class="btn btn-success">
+            {{ message }}
+            </div>
+        {% endfor %}
 
-    <br> 
-    <h1> Finalisation! </h1>
-    <p> page finale </p>
-    <br>
+            <br> <br> 
+            
+            <h1> MERCI POUR VOTRE ACHAT! </h1>
 
+            <h1> {#{ order.price }#} </h1>
+            <br> <br><h5 class="final"> Nous confirmons le paiement de  votre commande.<b><br><br>
+            {#{ order.price }#} </b>
+            {#{ ticket.admission.name }#} 
 
-
-    <button  type="submit" class="btn btn-primary">Sélectionner</button>
-    <br><br><br>
-
+            Nous venons de vous envoyer vos billets par courrier électronique.</h5>  <br>
+            {#{ email }#} <br>
+            <h5> Vérifiez votre boite mail </h5><br> <br>
+             <h3> Bonne visite! </h3>
+            <br> <br>
 
 {% endblock %}
 

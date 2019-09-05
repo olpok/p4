@@ -19,14 +19,16 @@ class Ticket
      */
     private $id;
 
-    //* @Assert\GreaterThanOrEqual("today")
+
 
     /**
+     * @Assert\NotNull
      * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $firstName;
 
     /**
+     * @Assert\NotNull
      * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $lastName;
@@ -45,11 +47,6 @@ class Ticket
      * @ORM\Column(type="date",nullable=true)
      */
     private $dateEntry;
-
-    /**
-     * @ORM\Column(type="boolean",nullable=true)
-     *//*
-    private $lowPriceAdmission;*/
 
     /**
      * @ORM\Column(type="boolean",nullable=true)
@@ -82,7 +79,6 @@ class Ticket
             $this->setCode($this->createTicketCode());
         }
     }
-
 
     public function createTicketCode() {
         return date('Ymdhis');
@@ -153,19 +149,6 @@ class Ticket
         return $this;
     }
 
-/*
-    public function getLowPriceAdmission(): ?bool
-    {
-        return $this->lowPriceAdmission;
-    }
-
-    public function setLowPriceAdmission(bool $lowPriceAdmission): self
-    {
-        $this->lowPriceAdmission = $lowPriceAdmission;
-
-        return $this;
-    }*/
-
     public function getFullDay(): ?bool
     {
         return $this->fullDay;
@@ -176,6 +159,15 @@ class Ticket
         $this->fullDay = $fullDay;
 
         return $this;
+    }
+
+    public function getFulldayLabel() {
+        if($this->getFullDay() == 0) {
+            $label = "Demi-journée";
+        } else {
+            $label = "Journée";
+        }
+        return $label;
     }
 
     public function getCode(): ?string
