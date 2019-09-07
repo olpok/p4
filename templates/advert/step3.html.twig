@@ -4,26 +4,17 @@
     <div id="wrapper">              
 
             <br/><h3>Cher {{ order.email }} </h3>  <br/>
-
-            {#{ order.id }#} 
             
             <h4>Rappel de votre commande:</h4>
 
-            {#{ order.dateorder | date ('d/m/Y')  }#}
-
             {% for ticket in order.tickets %}
                 <hr/>
-
+                
                 Date d'entrée: {{ ticket.dateentry | date ('d/m/Y')}}<br/>
-                {{ ticket.firstname }}  {{ ticket.lastname }} <br/>
-          
-                {#{ ticket.admission.name }#}             
-
+                {{ ticket.firstname }}  {{ ticket.lastname }} <br/>           
                 {{ ticket.admission.AmountLabel }}  <br/>
-
                 {{ ticket.fulldayLabel }}<br/>
                                  
-
                 <hr/>
             {% endfor %}
           

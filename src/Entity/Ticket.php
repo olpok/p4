@@ -53,10 +53,6 @@ class Ticket
      */
     private $fullDay;
 
-    /**
-     * @ORM\Column(type="string", length=255,nullable=true)
-     */
-    private $code;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\OrderTicket", inversedBy="tickets")
@@ -69,20 +65,6 @@ class Ticket
      */
     private $admission;
 
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function setCodePrePersist()
-    {
-        if($this->getCode() === null) {
-            $this->setCode($this->createTicketCode());
-        }
-    }
-
-    public function createTicketCode() {
-        return date('Ymdhis');
-    }
 
     public function getId(): ?int
     {
@@ -168,18 +150,6 @@ class Ticket
             $label = "Journée";
         }
         return $label;
-    }
-
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    public function setCode(string $code): self
-    {
-        $this->code = $code;
-
-        return $this;
     }
 
     public function getOrderTicket(): ?orderTicket

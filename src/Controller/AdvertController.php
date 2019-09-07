@@ -43,9 +43,7 @@ class AdvertController extends AbstractController
 
         $email_in_session = $this->session->get('email');
 
-        return $this->render('advert/home.html.twig', [
-            'title' => "Hello!"
-        ]);
+        return $this->render('advert/home.html.twig');
     }
    
 
@@ -60,7 +58,6 @@ class AdvertController extends AbstractController
       $form = $this->createFormBuilder($defaultData)
                     -> add ('dateEntry', DateType::class, 
                     ['label' => 'Date d\'entrée'
-                    //'widget' => 'single_text'
                     ]) 
                     -> add ('email', EmailType::class,)
                     -> add ('fullDay', ChoiceType::class, ['choices' => 
@@ -85,7 +82,6 @@ class AdvertController extends AbstractController
             {
                 $this->addFlash("error","La date doit être ultérieure à aujourd'hui");
                 return $this->redirectToRoute('select');
-                //return $this->render('advert/select.html.twig');
             }
             return $this->redirectToRoute('step2');
         }
@@ -146,12 +142,6 @@ class AdvertController extends AbstractController
     {
         \Stripe\Stripe::setApiKey("sk_test_DJhgWO9m8Fu2aXsUTVQEwnWJ00kfk8QKBu");
 
-
-
-      //  $orderId=$request->get ('orderId');
-        
-      //  echo "<pre>";print_r($_POST);exit;
-
         // Get the credit card details submitted by the form
         $token = $_POST['stripeToken'];
 
@@ -164,13 +154,10 @@ class AdvertController extends AbstractController
                 "description" => "Paiement Stripe - OpenClassrooms Exemple"
             ));
 
-          // 
-
             $orderId=$request->get ('orderId');
             $orderTicket =$this->getDoctrine()->getManager()->getRepository(OrderTicket::class)->find($orderId);
 
             // send mail
-                //$data = $this->session->get('email');
 
                 $message = (new \Swift_Message('Validation de votre commande'))
                 ->setFrom('send@example.com')
@@ -178,16 +165,14 @@ class AdvertController extends AbstractController
                 ->setBody(
                   $this->renderView(
                      'emails/confirmation.html.twig',
-                     array('order' => $orderTicket) 
-                     //['email' => $data]
-                     // array('orderId' => 'lolo')
+                      array('order' => $orderTicket) 
                   ),
                   'text/html'
                 )
                 ->addPart(
                     $this->renderView(
                         'emails/confirmation.txt.twig',
-                        array('order' => $orderTicket)
+                         array('order' => $orderTicket)
                     ),
                     'text/plain'
                 )
@@ -199,11 +184,7 @@ class AdvertController extends AbstractController
                 
                 return $this->render('advert/step4.html.twig',
                                 array('order' => $orderTicket)
-                                 //   ['email' => $data]
-                                // ['orderId' => $orderId]
             );
-
-        //    return $this->redirectToRoute("step4");
             } 
         
         catch(\Stripe\Error\Card $e) {
@@ -229,7 +210,6 @@ class AdvertController extends AbstractController
     public function step4()
 
     {
-        //echo '<pre>'; print_r($_SESSION); echo '</pre>';
         return $this->render('advert/step4.html.twig');
     } 
 
@@ -241,45 +221,5 @@ class AdvertController extends AbstractController
     {
         return $this->render('advert/mentionslegales.html.twig');
     } 
-
-    
-    /**
-     * @Route("/traduction/", name="traduction")
-   
-     */
-    public function sendEmail(\Swift_Mailer $mailer)
-    {
-        //$repo = $this->getDoctrine()->getManager()->getRepository(OrderTicket::class);
-        //$orderTicket =  $repo ->find($orderId);
-
-        $data = $this->session->get('email');
-
-        $message = (new \Swift_Message('Validation de votre commande'))
-        ->setFrom('send@example.com')
-        ->setTo('recipient@example.com')
-        ->setBody
-            ($this->renderView(
-                'emails/confirmation.html.twig',
-               // array('email' => $data)
-                ['email' => $data]
-            ),
-        'text/html'
-        )
- 
-    ;
-
-        $mailer->send($message);
-
-        
-        // return $this->redirectToRoute("step4");
-        // return $this->render('advert/index.html.twig', [
-        //             'controller_name' => 'AdvertController',
-        //         ]);
-
-        return $this->render('advert/step4.html.twig',
-                        ['email' => $data]
-    
-    );
-    }  
 
 }

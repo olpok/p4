@@ -29,7 +29,8 @@ class OrderTicketTest extends TestCase
 
         $ticket = new Ticket();
 
-        $admission = $this->em->getRepository(Admission::class)->findOneBy(['constant_key'=>"ADULT_PRICE"]);
+        $admission = new Admission;
+       // $this->em->getRepository(Admission::class)->findOneBy(['constant_key'=>"ADULT_PRICE"]);
         
         $ticket->setAdmission($admission);
         //$ticket->setDateEntry($this->session->get('dateEntry'));

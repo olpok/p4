@@ -2,7 +2,6 @@
 
 {% block body %}
    
-
       {% for message in app.flashes('error') %}
           <br>  
             <div class="btn btn-warning">
@@ -62,13 +61,14 @@
     {{ form_row(form.fullDay, {'attr':{'placeholder':"Journée"}}) }}
 
         <div class="row" class="col-sm-12">
-            <legend class="col-form-label col-sm-2 col-form-label required">Tarif adulte</legend>
+            <legend class="col-form-label col-sm-2 col-form-label required">
+                    Tarif  adulte
+            </legend> 
             <div class="col">
                 <div class="form-control adultTarif" id="adultTarif-16">16 €</div>
             </div>
-            <div class="col">{{ form_row(form.adultAdmission,
-            {'attr': 
-            {'value':0}}) }}
+            <div class="col">
+                {{ form_row(form.adultAdmission,{'attr': {'value':0}}) }}
             </div>
         </div>
 
@@ -132,7 +132,7 @@
             let tarifA = element[1]; // 16
             let totalA =  parseInt(tarifA)*parseInt(myVarA);
 
-        // senior total
+            // senior total
             let myVarS = $('#form_seniorAdmission').val();
             let idSeniorTarif = $('.seniorTarif').attr('id'); 
             let tarifS = idSeniorTarif.split('-')[1]; 
@@ -171,7 +171,6 @@
         })
 
 
-
         function updateFullDay() {
         let fullDay = $('#form_fullDay').val();
         if(fullDay == 0) {
@@ -180,7 +179,6 @@
             $('#total').html(newTotal);
         };
         };
-
 
 
     </script>

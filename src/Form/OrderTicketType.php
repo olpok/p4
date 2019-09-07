@@ -27,7 +27,7 @@ class OrderTicketType extends AbstractType
                             'required'=>false,
                             'allow_add'=>false,
                             'allow_delete'=>false,
-                            'prototype'=>true,
+                            'prototype'=>false,
                             'by_reference'=>true,
                             'mapped'=>true,
                            )

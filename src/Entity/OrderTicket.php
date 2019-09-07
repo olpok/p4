@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OrderTicketRepository")
@@ -41,12 +42,15 @@ class OrderTicket
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Ticket", mappedBy="order_ticket", cascade={"persist","remove"})
+     * @Assert\Valid
      */
     private $tickets;
+
 
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
+        $this->code = date('Ymdhis');
     }
    
     /**
@@ -62,21 +66,6 @@ class OrderTicket
     public function createDateOrder() {
         return (new \DateTime());
     }
-
-    
-    /**
-     * @ORM\PrePersist
-     *//*
-    public function setCodePrePersist()
-    {
-        if($this->getCode() === null) {
-            $this->setCode($this->createOrderCode());
-        }
-    }
-
-    public function createOrderCode() {
-        return date('Ymdhis');
-    }*/
 
     public function getId(): ?int
     {
