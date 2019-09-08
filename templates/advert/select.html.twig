@@ -60,44 +60,52 @@
     {{ form_row(form.email, {'attr':{'placeholder':"Votre email"}}) }}
     {{ form_row(form.fullDay, {'attr':{'placeholder':"Journée"}}) }}
 
-        <div class="row" class="col-sm-12">
+        <div class="row" >
             <legend class="col-form-label col-sm-2 col-form-label required">
                     Tarif  adulte
             </legend> 
-            <div class="col">
+            <div class="col">            
                 <div class="form-control adultTarif" id="adultTarif-16">16 €</div>
             </div>
-            <div class="col">
+            <div class="col-sm-5">
                 {{ form_row(form.adultAdmission,{'attr': {'value':0}}) }}
             </div>
         </div>
 
         <div class="row">
-            <legend class="col-form-label col-sm-2 col-form-label">Tarif senior</legend>
+            <legend class="col-form-label col-sm-2 col-form-label">
+            Tarif senior
+            </legend>
             <div class="col"> 
                 <div class="form-control seniorTarif" id="seniorTarif-12">12 €</div>
             </div>
-            <div class="col">{{ form_row(form.seniorAdmission,{'attr':{'value':0}}) }} </div>
+            <div class="col-sm-5">{{ form_row(form.seniorAdmission,{'attr':{'value':0}}) }} </div>
         </div>
 
         <div class="row">
-            <legend class="col-form-label col-sm-2 col-form-label">Tarif enfant</legend>
+            <legend class="col-form-label col-sm-2 col-form-label">
+            Tarif enfant
+            </legend>
             <div class="col">
                 <div class="form-control childTarif" id="childTarif-8">8 €</div>
             </div>
-            <div class="col">{{ form_row(form.childAdmission,{'attr':{'value':0}}) }}</div>
+            <div class="col-sm-5">{{ form_row(form.childAdmission,{'attr':{'value':0}}) }}</div>
         </div>
 
         <div class="row">
-            <legend class="col-form-label col-sm-2 col-form-label">Tarif réduit</legend>
+            <legend class="col-form-label col-sm-2 col-form-label">
+            Tarif réduit
+            </legend>
             <div class="col">
                 <div class="form-control lowPriceTarif" id="lowPriceTarif-10">10 €</div>
             </div>
-            <div class="col">{{ form_row(form.lowPriceAdmission,{'attr':{'value':0}}) }}</div>
+            <div class="col-sm-5">{{ form_row(form.lowPriceAdmission,{'attr':{'value':0}}) }}</div>
         </div>
 
         <div class="row">
-            <legend class="col-form-label col-sm-2 col-form-label required">Total</legend>
+            <legend class="col-form-label col-sm-2 col-form-label required">
+            Total
+            </legend>
             <div class="col"> 
                 <div class="form-control" id="total"> €</div>
             </div>

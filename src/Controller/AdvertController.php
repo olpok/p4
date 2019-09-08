@@ -60,7 +60,7 @@ class AdvertController extends AbstractController
                     ['label' => 'Date d\'entrée'
                     ]) 
                     -> add ('email', EmailType::class,)
-                    -> add ('fullDay', ChoiceType::class, ['choices' => 
+                    -> add ('fullDay', ChoiceType::class, ['label' => 'Type','choices' => 
                         ['Journée' => true,
                         'Demi-journée' => false]
                     ])

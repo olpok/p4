@@ -1,24 +1,24 @@
 {% block body %}
 
 
-    Félicitations  {{ order.email }} !
+Félicitations  {{ order.email }} !
 
-    Votre commande a bien été confirmée:
+Votre commande a bien été confirmée:
 
-    Code de la réservation: {{ order.code }}
+Code de la réservation: {{ order.code }}
 
-        {% for ticket in order.tickets %}
+    {% for ticket in order.tickets %}
   
-            Date d'entrée: {{ ticket.dateentry | date ('d/m/Y')}}         
-            Nom: {{ ticket.firstname }}  Prénom: {{ ticket.lastname }} <         
-            {{ ticket.admission.AmountLabel }}  
-            {{ ticket.fulldayLabel }}                              
+    Date d'entrée: {{ ticket.dateentry | date ('d/m/Y')}}         
+    Nom: {{ ticket.firstname }}  Prénom: {{ ticket.lastname }}         
+    {{ ticket.admission.AmountLabel }}  
+    {{ ticket.fulldayLabel }}                              
 
               
-        {% endfor %}
+    {% endfor %}
 
-    Montant total {{ order.price }} €
+Montant total {{ order.price }} €
 
-    Merci de votre achat et bonne visite!
+Merci de votre achat et bonne visite!
 
 {% endblock %}
