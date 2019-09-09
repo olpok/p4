@@ -25,6 +25,11 @@ class Admission
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
+    
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $amountLabel;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -87,18 +92,16 @@ class Admission
         return $this;
     }
 
-    public function getAmountLabel() 
+    public function getAmountLabel() : ?string
     {
-        if($this->getAmount() == 8) {
-            $label = "Enfant";
-        } elseif  ($this->getAmount() == 10){
-            $label = "Tarif réduit";
-        } elseif ($this->getAmount() == 12){
-            $label = "Senior";
-        } else {
-           $label = "Adulte";
-        }
-        return $label;
+       return $this->amountLabel;
+    }
+    
+     public function setAmountLabel(?string $amountLabel): self
+    {
+        $this->amountLabel = $amountLabel;
+
+        return $this;
     }
    
     /**
