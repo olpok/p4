@@ -143,7 +143,7 @@ class AdvertController extends AbstractController
         \Stripe\Stripe::setApiKey("sk_test_DJhgWO9m8Fu2aXsUTVQEwnWJ00kfk8QKBu");
 
         // Get the credit card details submitted by the form
-        $token = $_POST['stripeToken'];
+        $token = $request->get('stripeToken');
 
         // Create a charge: this will charge the user's card
         try {
