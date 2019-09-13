@@ -50,7 +50,12 @@ class OrderTicket
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
-        $this->code = date('Ymdhis');
+
+        $code = date('Ymdhis');
+        $random_letters = sha1($code); // encrypt the current date the sha1;
+        $letters = substr($random_letters, 0, 7); // take the 7th letters of the random_letters var
+        $this->code = $code.'-'.$letters;   
+
     }
    
     /**
@@ -110,14 +115,14 @@ class OrderTicket
         return $this;
     }
 
-    public function getCode(): ?int
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(int $code): self
+    public function setCode(string $code): self
     {
-        $this->price = $code;
+        $this->code = $code;
 
         return $this;
     }
