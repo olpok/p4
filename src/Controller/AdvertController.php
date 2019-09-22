@@ -180,7 +180,7 @@ class AdvertController extends AbstractController
 
                 $mailer->send($message);
 
-                $this->addFlash('success','Bravo ça marche !');
+                $this->addFlash('success','Félicitations !');
                 
                 return $this->render('advert/step4.html.twig',
                                 array('order' => $orderTicket)
@@ -189,7 +189,7 @@ class AdvertController extends AbstractController
         
         catch(\Stripe\Error\Card $e) {
 
-            $this->addFlash("error","Snif ça marche pas :(");
+            $this->addFlash('error','Erreur! Recommencez la transaction.');
             return $this->redirectToRoute("step3");
             // The card has been declined
         }

@@ -35,7 +35,7 @@ class OrderManager
      */
     public function beginOrder($data)
     {
-        $now  = (new \DateTime());
+        $now  = new \DateTime();
 
         if ($data['dateEntry'] <= $now) return false;
         

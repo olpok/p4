@@ -3,6 +3,7 @@
 namespace Tests\Entity;
 
 use App\Entity\Ticket;
+use App\Entity\Admission;
 use App\Entity\OrderTicket;
 use PHPUnit\Framework\TestCase;
 
@@ -10,47 +11,32 @@ use PHPUnit\Framework\TestCase;
 class OrderTicketTest extends TestCase
 {
 
-    /**
-     * @var\Doctrine\ORM\EntityManager
-     */
-    private $em;
-
-    public function __construct(EntityManager $em) {
-      $this->em = $em;
-    }
-
     public function testaddTicket()
 
-    //public function addTicket(Ticket $ticket): self
-
     {
-        $ticket = new Ticket;
-        //$ticket->getFullDay() = 0;
-
-        $ticket = new Ticket();
 
         $admission = new Admission;
-       // $this->em->getRepository(Admission::class)->findOneBy(['constant_key'=>"ADULT_PRICE"]);
+        $admission->setAmount(16);
+
+        $ticket1 = new Ticket;
+        $ticket1->setFullDay(1);
+        $ticket1->setAdmission($admission);
+
+        $ticket2 = new Ticket;
+        $ticket2->setFullDay(1);
+
+        $ticket2->setAdmission($admission);
         
-        $ticket->setAdmission($admission);
-        //$ticket->setDateEntry($this->session->get('dateEntry'));
-        $ticket->setFullDay(1);
-
-        $order->addTicket($ticket);
-
-        $orderTicket = new OrderTicket(1, 10, 1);
         
-        $result = $orderTicket->addTicket($ticket);
+        $order = new OrderTicket();
+           
+        $order->addTicket($ticket1);
+        $order->addTicket($ticket2);
 
-        
-        $this->assertSame(10, $result);
+        $result=$order->getPrice();
 
+        $this->assertSame(32, $result);
 
-
-
-      //  $result= $product->computeTVA());
-      //  $this->assertSame(1.1, $result);
-      //  $this->assertSame(1.1, $product->computeTVA());
     }
 }  
     
