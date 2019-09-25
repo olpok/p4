@@ -194,16 +194,7 @@ class AdvertController extends AbstractController
             // The card has been declined
         }
     }
-
-       
-    /**
-     * @Route("/contact", name="contact")
-     */
-    public function contact()
-    {
-        return $this->render('advert/contact.html.twig');
-    } 
-
+    
     /**
      * @Route("/step4", name="step4")
      */
@@ -212,7 +203,14 @@ class AdvertController extends AbstractController
     {
         return $this->render('advert/step4.html.twig');
     } 
-
+      
+    /**
+     * @Route("/contact", name="contact")
+     */
+    public function contact()
+    {
+        return $this->render('advert/contact.html.twig');
+    }  
      
     /**
      * @Route("/mentionslegales", name="mentionslegales")

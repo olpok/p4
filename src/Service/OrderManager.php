@@ -31,7 +31,7 @@ class OrderManager
     /**
      * insert in session datas from order
      * @param $data
-     * @return int
+     * @return bool
      */
     public function beginOrder($data)
     {
