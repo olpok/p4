@@ -19,8 +19,6 @@ class Ticket
      */
     private $id;
 
-
-
     /**
      * @Assert\NotNull
      * @ORM\Column(type="string", length=255,nullable=true)
@@ -143,8 +141,9 @@ class Ticket
         return $this;
     }
 
-    public function getFulldayLabel() {
-        if($this->getFullDay() == 0) {
+    public function getFulldayLabel()
+    {
+        if ($this->getFullDay() == 0) {
             $label = "Demi-journée";
         } else {
             $label = "Journée";

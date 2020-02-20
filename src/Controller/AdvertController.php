@@ -179,7 +179,6 @@ class AdvertController extends AbstractController
                 ;
 
                 $mailer->send($message);
-
                 $this->addFlash('success','Félicitations !');
                 
                 return $this->render('advert/step4.html.twig',

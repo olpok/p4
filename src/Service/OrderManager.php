@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Entity\OrderTicket;
 use App\Entity\Ticket;
@@ -50,8 +49,6 @@ class OrderManager
         return true;
 
     }
-
-
    
     /**
      * create an order
