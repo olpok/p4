@@ -4,6 +4,7 @@ Projet 4 du parcours Chef de Projet Multimédia spécialité développement d'Op
 Symfony 4
 
 Pré-requis : MySql et PHP 7.1.*
+
 Installation
 1. Clonez le dépôt : https://github.com/olpok/p4.git 
 2. Installer les dépendances : composer install  
